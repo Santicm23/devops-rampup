@@ -13,7 +13,7 @@ async function main() {
     pool.query = util.promisify(pool.query);
 
     const publicationsQuery =
-      "INSERT INTO publications (name, avatar) VALUES ?";
+      "INSERT IGNORE INTO publications (name, avatar) VALUES ?";
     const publicationsValues = [
       ["The Daily Reviewer", "glyphicon-eye-open"],
       ["International Movie Critic", "glyphicon-fire"],
@@ -26,7 +26,7 @@ async function main() {
     await pool.query(publicationsQuery, [publicationsValues]);
 
     const reviewersQuery =
-      "INSERT INTO reviewers (name, publication, avatar) VALUES ?";
+      "INSERT IGNORE INTO reviewers (name, publication, avatar) VALUES ?";
     const reviewersValues = [
       [
         "Robert Smith",
@@ -67,7 +67,7 @@ async function main() {
     await pool.query(reviewersQuery, [reviewersValues]);
 
     const moviesQuery =
-      "INSERT INTO movies (title, release_year, score, reviewer, publication) VALUES ?";
+      "INSERT IGNORE INTO movies (title, release_year, score, reviewer, publication) VALUES ?";
     const moviesValues = [
       ["Suicide Squad", "2016", 8, "Robert Smith", "The Daily Reviewer"],
       [
